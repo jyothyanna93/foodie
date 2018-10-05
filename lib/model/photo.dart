@@ -7,8 +7,9 @@ import 'package:flutter/foundation.dart';
 
 Future<List<Photo>> fetchPhotos() async{
   final response = await http.get('https://jsonplaceholder.typicode.com/photos');
+
   if(response.statusCode == 200){
-    print(response.body.length);
+   // print(response.body);
     return compute(parsedResponse,response.body);
   }else{
     throw new Exception('failed to load ');
