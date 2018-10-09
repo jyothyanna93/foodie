@@ -9,27 +9,24 @@ Future<List<Restaurants>> getRestaurants()async{
   String url = 'http://http://10.168.10.27:81/foodies/api/getRestaurants';
   final response = await http.get('http://10.168.10.27:81/foodies/api/getRestaurants');
 
-print(response);
 
+  print('response.runtimeType ${response.body.runtimeType}');
   if (response.statusCode == 200){
-
-//    print(response);
-//    print(response.body);
-
   return parsedResponse(response.body);
   }
   else{
-    print(response.body);
-    throw new Exception('failed to load ');
+      throw new Exception('failed to load ');
   }
 }
 
 
 
 List<Restaurants> parsedResponse(String body) {
-  final pearsedData = json.decode(body);//.cast<Map<String,dynamic>>();
-  return pearsedData.map<Restaurants>((json) => new Restaurants.fromjson(json))
-      .toList();
+  print(body.runtimeType);
+  final parsedData = json.decode(body).cast<Map<String,dynamic>>();
+  print('parsedData.runtimeType${parsedData.runtimeType}');
+
+  return parsedData.map<Restaurants>((json) => Restaurants.fromjson(json)).toList();
 
 }
 
@@ -37,17 +34,24 @@ List<Restaurants> parsedResponse(String body) {
 class Restaurants{
   final int code;
   final String imp;
-  List<RestaurantsData> data;
+  final List<RestaurantsData> data;
 
   Restaurants({this.code,this.imp,this.data});
 
   factory Restaurants.fromjson(Map<String,dynamic>json){
+
+    var list = json['data'] as List;
+    print(list.runtimeType);
+    final List<RestaurantsData> data = list.map((i)=>RestaurantsData.fromjson
+      (i)).toList();
+
     return new Restaurants(
       code: json['code'],
       imp: json['i_m_p'],
-      data: json['data'] .map((value) => new RestaurantsData.fromjson
-      (value)).toList()
-      );
+      data: (json['data'] as List).map((i)=> new RestaurantsData.fromjson
+      (i)).toList(),
+
+    );
   }
 
 }
