@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodiez/model/post.dart';
-import 'package:foodiez/model/restaurants.dart';
+import 'package:foodiez/services/getresturantservice.dart';
 import 'package:foodiez/ui/photolist.dart';
 import 'package:foodiez/model/photo.dart';
 import 'package:foodiez/ui/homepage.dart';
