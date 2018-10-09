@@ -5,8 +5,8 @@ import 'package:foodiez/ui/photolist.dart';
 import 'package:foodiez/model/photo.dart';
 import 'package:foodiez/ui/homepage.dart';
 import 'package:foodiez/ui/postlist.dart';
-import 'package:foodiez/ui/restrtntlist.dart';
-import 'package:foodiez/ui/settings.dart';
+import 'package:foodiez/ui/restaurantlist.dart';
+
 
 class FTab extends StatefulWidget {
   @override
@@ -70,7 +70,10 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
                if (snapshot.hasError) print(snapshot.error);
                 //print('snapshot.hasData${snapshot.hasData}');
                 return snapshot.hasData
-                ?new Text('.....'):new Container(alignment: AlignmentDirectional.center,);
+                    ?new RestaurantList(restaurants: snapshot.data,)
+                    :new Container
+                  (alignment: AlignmentDirectional.center,
+                   child: new Text('list'),);
               },
             )
           ],
