@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:foodiez/model/post.dart';
-import 'package:foodiez/services/getresturantservice.dart';
-import 'package:foodiez/ui/photolist.dart';
 import 'package:foodiez/model/photo.dart';
+import 'package:foodiez/services/getordersservice.dart';
+import 'package:foodiez/services/getresturantservice.dart';
 import 'package:foodiez/ui/homepage.dart';
-import 'package:foodiez/ui/postlist.dart';
+import 'package:foodiez/ui/orderlist.dart';
+import 'package:foodiez/ui/photolist.dart';
 import 'package:foodiez/ui/restaurantlist.dart';
-
 
 class FTab extends StatefulWidget {
   @override
@@ -54,11 +53,11 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
                         );
                 }),
             new FutureBuilder(
-                future: fetchPost(),
+                future: getOrders(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) print(snapshot.error);
                   return snapshot.hasData
-                      ? new PostList(posts: snapshot.data)
+                      ? new OrderList(orders: snapshot.data)
                       : new Container(
                           alignment: AlignmentDirectional.center,
                         );
@@ -66,14 +65,17 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
             new FutureBuilder(
               future: getRestaurants(),
               builder: (context, snapshot) {
-                print(snapshot);
-               if (snapshot.hasError) print(snapshot.error);
+                // print(snapshot);
+                if (snapshot.hasError) print(snapshot.error);
                 //print('snapshot.hasData${snapshot.hasData}');
                 return snapshot.hasData
-                    ?new RestaurantList(restaurants: snapshot.data,)
-                    :new Container
-                  (alignment: AlignmentDirectional.center,
-                   child: new Text('list'),);
+                    ? new RestaurantList(
+                        restaurants: snapshot.data,
+                      )
+                    : new Container(
+                        alignment: AlignmentDirectional.center,
+                        child: new Text('list'),
+                      );
               },
             )
           ],

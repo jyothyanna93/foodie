@@ -1,45 +1,34 @@
-
-
-class Restaurants{
+class Restaurants {
   final int code;
 
- final ResturantData data;
+  final ResturantData data;
 
-  Restaurants({this.code,this.data});
+  Restaurants({this.code, this.data});
 
-  factory Restaurants.fromjson(Map<String,dynamic>json){
-
-    return  Restaurants(
-      code: json['code'],
-      data: ResturantData.fromjson(json['data'])
-    );
+  factory Restaurants.fromjson(Map<String, dynamic> json) {
+    return Restaurants(
+        code: json['code'], data: ResturantData.fromjson(json['data']));
   }
-
 }
-
 
 class ResturantData {
   final String imp;
   final List<Restaurant> rstrntList;
-  ResturantData({this.imp,this.rstrntList});
+  ResturantData({this.imp, this.rstrntList});
 
-
-  factory ResturantData.fromjson(Map<String,dynamic>json){
-
+  factory ResturantData.fromjson(Map<String, dynamic> json) {
     var list = json['r_s'] as List;
-    print(list.runtimeType);
-    List<Restaurant> restaurantList = list.map((i)=>  Restaurant
-        .fromjson(i)).toList();
-    print(restaurantList);
+    //  print(list.runtimeType);
+    List<Restaurant> restaurantList =
+        list.map((i) => Restaurant.fromjson(i)).toList();
+    //  print(restaurantList);
 
-    return  ResturantData(
+    return ResturantData(
       imp: json['i_m_p'],
       rstrntList: restaurantList,
-      );
+    );
   }
-
 }
-
 
 class Restaurant {
   final int id;
@@ -73,8 +62,6 @@ class Restaurant {
         avrgCost: json['avrgCost'],
         rating: json['rating'],
         status: json['status'],
-        imgString: json['i_m']
-        );
+        imgString: json['i_m']);
   }
 }
-
