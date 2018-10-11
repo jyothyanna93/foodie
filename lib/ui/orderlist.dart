@@ -41,13 +41,13 @@ class OrderList extends StatelessWidget {
                 return new ListTile(
                   leading: new CircleAvatar(
                       child: new Text(
-                        '${oList[index].restaurantName.substring(0, 1).toUpperCase()}',
+                        '${oList[index].name.substring(0, 1).toUpperCase()}',
                         style: TextStyle(color: Colors.white),
                       ),
                       backgroundColor: colors[random.nextInt(10)]),
 
                   title: new Text(
-                    oList[index].restaurantName.toUpperCase(),
+                    oList[index].name.toUpperCase(),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18.0,

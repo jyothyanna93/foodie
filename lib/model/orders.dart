@@ -1,59 +1,43 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'orders.g.dart';
+
+@JsonSerializable()
 class OrderData {
   final int code;
   final List<Order> data;
   OrderData({this.code, this.data});
 
-  factory OrderData.fromjson(Map<String, dynamic> json) {
-    var list = json['data'] as List;
-    List<Order> orderList = list.map((i) => Order.fromjson(i)).toList();
-
-//    print(orderList);
-
-    return OrderData(
-      code: json['code'],
-      data: orderList,
-    );
-  }
+  factory OrderData.fromJson(Map<String, dynamic> json) =>
+      _$OrderDataFromJson(json);
 }
 
+@JsonSerializable()
 class Order {
-  final int id;
-  final int ownerId;
-  final String restaurantName;
-  final int languageId;
-  final String firstname;
-  final String languageCode;
-  final int orderStatus;
-  final String productPrice;
-  final String extrThings;
-  final String paymentStatus;
-  final String orderItemStatus;
+  final int id; //id;
+  final int o_i; //ownerId;
+  final String name; //restaurantName;
+  final int l_i; //languageId;
+  final String f_n; //firstname;
+  final String l_c; //languageCode;
+  final int o_s; //orderStatus;
+  final String p_p; //productPrice;
+  final String e_t; //extrThings;
+  final String p_s; //paymentStatus;
+  final String o_i_s; //orderItemStatus;
 
   Order(
       {this.id,
-      this.ownerId,
-      this.restaurantName,
-      this.languageId,
-      this.firstname,
-      this.languageCode,
-      this.orderStatus,
-      this.productPrice,
-      this.extrThings,
-      this.paymentStatus,
-      this.orderItemStatus});
+      this.o_i,
+      this.name,
+      this.l_i,
+      this.f_n,
+      this.l_c,
+      this.o_s,
+      this.p_p,
+      this.e_t,
+      this.p_s,
+      this.o_i_s});
 
-  factory Order.fromjson(Map<String, dynamic> json) {
-    return new Order(
-        id: json['id'],
-        ownerId: json['o_i'],
-        restaurantName: json['name'],
-        languageId: json['category'],
-        firstname: json['f_n'],
-        languageCode: json['l_c'],
-        orderStatus: json['o_s'],
-        productPrice: json['p_p'],
-        extrThings: json['e_t'],
-        paymentStatus: json['p_s'],
-        orderItemStatus: json['o_i_s']);
-  }
+  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 }

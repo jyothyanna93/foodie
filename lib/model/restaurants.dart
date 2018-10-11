@@ -1,67 +1,51 @@
-class Restaurants {
+import 'package:json_annotation/json_annotation.dart';
+
+part 'restaurants.g.dart';
+
+@JsonSerializable()
+class Restaurants extends Object {
   final int code;
 
   final ResturantData data;
 
   Restaurants({this.code, this.data});
 
-  factory Restaurants.fromjson(Map<String, dynamic> json) {
-    return Restaurants(
-        code: json['code'], data: ResturantData.fromjson(json['data']));
-  }
+  factory Restaurants.fromJson(Map<String, dynamic> json) =>
+      _$RestaurantsFromJson(json);
 }
 
-class ResturantData {
-  final String imp;
-  final List<Restaurant> rstrntList;
-  ResturantData({this.imp, this.rstrntList});
+@JsonSerializable()
+class ResturantData extends Object {
+  final String i_m_p; // imageUrl
+  final List<Restaurant> r_s; // resturantList
+  ResturantData({this.i_m_p, this.r_s});
 
-  factory ResturantData.fromjson(Map<String, dynamic> json) {
-    var list = json['r_s'] as List;
-    //  print(list.runtimeType);
-    List<Restaurant> restaurantList =
-        list.map((i) => Restaurant.fromjson(i)).toList();
-    //  print(restaurantList);
-
-    return ResturantData(
-      imp: json['i_m_p'],
-      rstrntList: restaurantList,
-    );
-  }
+  factory ResturantData.fromJson(Map<String, dynamic> json) =>
+      _$ResturantDataFromJson(json);
 }
 
-class Restaurant {
+@JsonSerializable()
+class Restaurant extends Object {
   final int id;
-  final String rstrntName;
-  final int rt;
-  final String category;
-  final int type;
-  final String avrgCost;
-  final String rating;
-  final int status;
-  final String imgString;
+  final String n_m; //rstrntName;
+  final int r_t; //rt;
+  final String category; //category;
+  final int type; //type;
+  final String rating; //rating;
+  final String a_c; //avrgCost;
+  final int status; //status;
+  final String i_m; //imgString;
 
   Restaurant(
       {this.id,
-      this.rstrntName,
-      this.rt,
+      this.n_m,
+      this.r_t,
       this.category,
       this.type,
-      this.avrgCost,
       this.rating,
+      this.a_c,
       this.status,
-      this.imgString});
-
-  factory Restaurant.fromjson(Map<String, dynamic> json) {
-    return new Restaurant(
-        id: json['id'],
-        rstrntName: json['n_m'],
-        rt: json['r_t'],
-        category: json['category'],
-        type: json['type'],
-        avrgCost: json['avrgCost'],
-        rating: json['rating'],
-        status: json['status'],
-        imgString: json['i_m']);
-  }
+      this.i_m});
+  factory Restaurant.fromJson(Map<String, dynamic> json) =>
+      _$RestaurantFromJson(json);
 }

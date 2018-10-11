@@ -22,7 +22,7 @@ Future<RestaurantType> getRestaurantsType() async {
 RestaurantType parsedResponse(String body) {
   print(body.runtimeType);
   final parsedData = json.decode(body); //.cast<Map<String,dynamic>>();
-  print(parsedData);
+  print('getRestaurantsType${parsedData}');
   print('parsedData.runtimeType${parsedData.runtimeType}');
-  return RestaurantType.fromjson(parsedData);
+  return RestaurantType.fromJson(parsedData);
 }

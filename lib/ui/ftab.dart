@@ -27,7 +27,7 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
               tabs: <Tab>[
                 new Tab(icon: new Icon(Icons.home)),
                 new Tab(icon: new Icon(Icons.rss_feed)),
-                new Tab(icon: new Icon(Icons.perm_identity)),
+                new Tab(icon: new Icon(Icons.shopping_basket)),
                 new Tab(icon: new Icon(Icons.settings)),
               ],
               indicatorColor: Colors.yellow,
@@ -65,9 +65,9 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
             new FutureBuilder(
               future: getRestaurants(),
               builder: (context, snapshot) {
-                // print(snapshot);
+                print(snapshot);
                 if (snapshot.hasError) print(snapshot.error);
-                //print('snapshot.hasData${snapshot.hasData}');
+                print('snapshot.hasData${snapshot.hasData}');
                 return snapshot.hasData
                     ? new RestaurantList(
                         restaurants: snapshot.data,

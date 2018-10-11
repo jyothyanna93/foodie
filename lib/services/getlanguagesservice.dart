@@ -10,7 +10,7 @@ Future<LanguageData> getLanguages() async {
   String url = 'http://10.168.10.27:81/foodies/api/getLanguages';
   final response = await http.get(url);
 
-  print('response.runtimeType ${response}');
+  // print('response.runtimeType ${response}');
   if (response.statusCode == 200) {
     return compute(parsedResponse, response.body);
   } else {
@@ -19,9 +19,9 @@ Future<LanguageData> getLanguages() async {
 }
 
 LanguageData parsedResponse(String body) {
-  print(body);
+  //print(body.runtimeType);
   final parsedData = json.decode(body);
-  print(parsedData);
-  print('parsedData.runtimeType${parsedData.runtimeType}');
-  return LanguageData.fromjson(parsedData);
+  // print(parsedData);
+  // print('parsedData.runtimeType${parsedData.runtimeType}');
+  return LanguageData.fromJson(parsedData);
 }

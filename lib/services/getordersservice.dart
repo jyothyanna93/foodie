@@ -27,5 +27,5 @@ OrderData parsedResponse(String body) {
   final parsedData = json.decode(body);
   // print(parsedData);
   //print('parsedData.runtimeType${parsedData.runtimeType}');
-  return OrderData.fromjson(parsedData);
+  return OrderData.fromJson(parsedData);
 }

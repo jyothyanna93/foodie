@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage>
     Prefs.init();
     getRestaurantsType();
     getLanguages();
+    // getRestaurantOffersAndPromotions();
 
     _counter = Prefs.getIntF('counter');
   }
