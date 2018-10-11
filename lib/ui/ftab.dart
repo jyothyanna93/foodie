@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:foodiez/model/orders.dart';
 import 'package:foodiez/model/photo.dart';
+import 'package:foodiez/model/restaurants.dart';
 import 'package:foodiez/services/getordersservice.dart';
 import 'package:foodiez/services/getresturantservice.dart';
 import 'package:foodiez/ui/homepage.dart';
@@ -14,6 +18,23 @@ class FTab extends StatefulWidget {
 
 class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
   TabController tabController;
+  Future<List<Photo>> _responsePhoto;
+  Future<Restaurants> _resturants;
+  Future<OrderData> _orderData;
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  void _refresh() {
+    setState(() {
+      _resturants = getRestaurants();
+      _orderData = getOrders();
+      _responsePhoto = fetchPhotos();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (tabController == null) {
@@ -42,9 +63,10 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
             new MyHomePage(
                 title: 'Flutter '
                     'Demo'),
-            new FutureBuilder<List<Photo>>(
-                future: fetchPhotos(),
-                builder: (context, snapshot) {
+            new FutureBuilder(
+                future: _responsePhoto,
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<Photo>> snapshot) {
                   if (snapshot.hasError) print(snapshot.error);
                   return snapshot.hasData
                       ? new PhotoList(photos: snapshot.data)
@@ -53,7 +75,7 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
                         );
                 }),
             new FutureBuilder(
-                future: getOrders(),
+                future: _orderData,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) print(snapshot.error);
                   return snapshot.hasData
@@ -63,11 +85,11 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
                         );
                 }),
             new FutureBuilder(
-              future: getRestaurants(),
+              future: _resturants,
               builder: (context, snapshot) {
                 print(snapshot);
                 if (snapshot.hasError) print(snapshot.error);
-                print('snapshot.hasData${snapshot.hasData}');
+                print('snapshot.hasData${snapshot.data}');
                 return snapshot.hasData
                     ? new RestaurantList(
                         restaurants: snapshot.data,

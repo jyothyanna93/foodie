@@ -17,8 +17,8 @@ class OffersAndPromotions {
 @JsonSerializable()
 class OfferData {
   final String i_m_p; //imp imageURL;
-  final List<Offer> offertList;
-  OfferData({this.i_m_p, this.offertList});
+  final List<Offer> o_p;
+  OfferData({this.i_m_p, this.o_p});
 
   factory OfferData.fromJson(Map<String, dynamic> json) =>
       _$OfferDataFromJson(json);

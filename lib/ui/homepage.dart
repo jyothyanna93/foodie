@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:foodiez/model/resturantofferpromotion.dart';
 import 'package:foodiez/services/getlanguagesservice.dart';
+import 'package:foodiez/services/getofferspromotionservice.dart';
 import 'package:foodiez/services/getresturanttypeservice.dart';
+import 'package:foodiez/util/imgecarousel.dart';
 import 'package:foodiez/util/prefs.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -17,6 +20,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   Future<int> _counter;
+  Future<OffersAndPromotions> _offerPromotion;
 
   void _incrementCounter() {
     int counter = Prefs.getInt('counter') ?? 0;
@@ -38,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage>
     Prefs.init();
     getRestaurantsType();
     getLanguages();
-    // getRestaurantOffersAndPromotions();
+    _offerPromotion = getRestaurantOffersAndPromotions();
 
     _counter = Prefs.getIntF('counter');
   }
@@ -46,6 +50,73 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void dispose() {
     super.dispose();
+  }
+
+  Widget _iCarousel() {
+    return FutureBuilder(
+        future: _offerPromotion,
+        builder: (contex, snapshot) {
+          if (snapshot.hasError) {
+            return new Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width,
+                alignment: AlignmentDirectional.center,
+                child: new Text('Some error occured'));
+          } else {
+            if (snapshot.hasData) {
+              final OffersAndPromotions offers = snapshot.data;
+              final OfferData offerData = offers.data;
+              final List<Offer> offerList = offerData.o_p;
+              final String imgString = offerData.i_m_p;
+              //String imageUrl = '${imgString}${offerList[index].}';
+              return new ImageCarousel(
+                <ImageProvider>[
+                  NetworkImage('${imgString}${offerList[0].i_m}'),
+                  NetworkImage('${imgString}${offerList[1].i_m}'),
+                  NetworkImage('${imgString}${offerList[2].i_m}'),
+                ],
+                interval: Duration(seconds: 2),
+                fit: BoxFit.fitWidth,
+              );
+            } else {
+              return new Container(
+                child: Center(child: new CircularProgressIndicator()),
+                alignment: AlignmentDirectional.center,
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width,
+              );
+            }
+          }
+        });
+  }
+
+  Widget _counterWidget() {
+    return new FutureBuilder<int>(
+      future: _counter,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) print(snapshot.error);
+
+        return snapshot.hasData
+            ? new Center(
+                child: Container(
+                    child: new Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Text(
+                    'You have pushed the button this many times:',
+                  ),
+                  new Text(
+                    '${snapshot.data}',
+                    style: Theme.of(context).textTheme.display1,
+                  )
+                ],
+              )))
+            : new Container(
+                alignment: AlignmentDirectional.center,
+                child: new CircularProgressIndicator(),
+              );
+      },
+    );
   }
 
   @override
@@ -83,32 +154,12 @@ class _MyHomePageState extends State<MyHomePage>
           ],
         ),
       ),
-      body: new Center(
-        child: new FutureBuilder<int>(
-          future: _counter,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) print(snapshot.error);
-
-            return snapshot.hasData
-                ? new Container(
-                    child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Text(
-                        'You have pushed the button this many times:',
-                      ),
-                      new Text(
-                        '${snapshot.data}',
-                        style: Theme.of(context).textTheme.display1,
-                      )
-                    ],
-                  ))
-                : new Container(
-                    alignment: AlignmentDirectional.center,
-                    child: new CircularProgressIndicator(),
-                  );
-          },
-        ),
+      body: new Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _iCarousel(),
+          _counterWidget(),
+        ],
       ),
       floatingActionButton: new FloatingActionButton(
         onPressed: _incrementCounter,

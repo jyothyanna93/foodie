@@ -11,7 +11,7 @@ Future<RestaurantType> getRestaurantsType() async {
 
   final response = await http.get(url);
 
-  print('response.runtimeType ${response.body.runtimeType}');
+  // print('response.runtimeType ${response.body.runtimeType}');
   if (response.statusCode == 200) {
     return compute(parsedResponse, response.body);
   } else {
@@ -22,7 +22,7 @@ Future<RestaurantType> getRestaurantsType() async {
 RestaurantType parsedResponse(String body) {
   print(body.runtimeType);
   final parsedData = json.decode(body); //.cast<Map<String,dynamic>>();
-  print('getRestaurantsType${parsedData}');
-  print('parsedData.runtimeType${parsedData.runtimeType}');
+  //print('getRestaurantsType${parsedData}');
+  // print('parsedData.runtimeType${parsedData.runtimeType}');
   return RestaurantType.fromJson(parsedData);
 }

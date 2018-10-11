@@ -22,8 +22,8 @@ Future<Restaurants> getRestaurants() async {
 Restaurants parsedResponse(String body) {
   // print(body.runtimeType);
   final parsedData = json.decode(body); //.cast<Map<String,dynamic>>();
-  print('getRestaurants${parsedData}');
-  // print('parsedData.runtimeType${parsedData.runtimeType}');
+  //print('getRestaurants${parsedData}');
+  //print('parsedData.runtimeType${parsedData.runtimeType}');
 //  Restaurants rstrnts = new Restaurants.fromjson(parsedData);
 //  print(rstrnts.data);
   return Restaurants.fromJson(parsedData);
