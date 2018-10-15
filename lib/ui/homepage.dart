@@ -97,20 +97,23 @@ class _MyHomePageState extends State<MyHomePage>
         if (snapshot.hasError) print(snapshot.error);
 
         return snapshot.hasData
-            ? new Center(
-                child: Container(
+            ? Container(
+                color: Colors.yellow,
+                width: MediaQuery.of(context).size.width,
+                child: Center(
                     child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  new Text(
-                    '${snapshot.data}',
-                    style: Theme.of(context).textTheme.display1,
-                  )
-                ],
-              )))
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    new Text(
+                      'You have pushed the button this many times:',
+                    ),
+                    new Text(
+                      '${snapshot.data}',
+                      style: Theme.of(context).textTheme.display1,
+                    )
+                  ],
+                )))
             : new Container(
                 alignment: AlignmentDirectional.center,
                 child: new CircularProgressIndicator(),
@@ -155,7 +158,8 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
       body: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           _iCarousel(),
           _counterWidget(),

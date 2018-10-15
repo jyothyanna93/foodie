@@ -11,16 +11,12 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-
-        primarySwatch: Colors.blue,
-        ),
+        primarySwatch: Colors.red,
+      ),
       home: new SplashScreen(),
       routes: <String, WidgetBuilder>{
-        '/main': (BuildContext context) => new FTab()},
-      );
+        '/main': (BuildContext context) => new FTab()
+      },
+    );
   }
-
 }
-
-
-

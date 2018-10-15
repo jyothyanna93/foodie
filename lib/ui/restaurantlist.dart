@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodiez/model/restaurants.dart';
+import 'package:foodiez/ui/location.dart';
 import 'package:foodiez/util/file.dart';
 
 class RestaurantList extends StatelessWidget {
@@ -7,6 +8,7 @@ class RestaurantList extends StatelessWidget {
   List<Restaurant> rl;
   ResturantData data;
   String imageUrl;
+
   RestaurantList({Key key, this.restaurants}) : super(key: key);
 
   Widget _body() {
@@ -56,6 +58,17 @@ class RestaurantList extends StatelessWidget {
     return new Scaffold(
         appBar: new AppBar(
           title: new Text('Restaurant List'),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.location_searching),
+                tooltip: 'Location',
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new LocationUi()));
+                })
+          ],
         ),
         body: _body());
   }

@@ -10,6 +10,7 @@ import 'package:foodiez/ui/homepage.dart';
 import 'package:foodiez/ui/orderlist.dart';
 import 'package:foodiez/ui/photolist.dart';
 import 'package:foodiez/ui/restaurantlist.dart';
+import 'package:foodiez/util/uisnapshotempty.dart';
 
 class FTab extends StatefulWidget {
   @override
@@ -43,7 +44,7 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
 
     return new Scaffold(
         bottomNavigationBar: new Material(
-            color: Colors.blue,
+            color: Colors.red,
             child: new TabBar(
               tabs: <Tab>[
                 new Tab(icon: new Icon(Icons.home)),
@@ -80,9 +81,7 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
                   if (snapshot.hasError) print(snapshot.error);
                   return snapshot.hasData
                       ? new OrderList(orders: snapshot.data)
-                      : new Container(
-                          alignment: AlignmentDirectional.center,
-                        );
+                      : new UINoResponse(title: 'Order List');
                 }),
             new FutureBuilder(
               future: _resturants,
@@ -94,10 +93,7 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
                     ? new RestaurantList(
                         restaurants: snapshot.data,
                       )
-                    : new Container(
-                        alignment: AlignmentDirectional.center,
-                        child: new Text('list'),
-                      );
+                    : new UINoResponse(title: 'Resturant List');
               },
             )
           ],
