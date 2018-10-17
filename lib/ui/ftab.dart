@@ -7,8 +7,8 @@ import 'package:foodiez/model/restaurants.dart';
 import 'package:foodiez/services/getordersservice.dart';
 import 'package:foodiez/services/getresturantservice.dart';
 import 'package:foodiez/ui/homepage.dart';
+import 'package:foodiez/ui/mapui.dart';
 import 'package:foodiez/ui/orderlist.dart';
-import 'package:foodiez/ui/photolist.dart';
 import 'package:foodiez/ui/restaurantlist.dart';
 import 'package:foodiez/util/uisnapshotempty.dart';
 
@@ -64,17 +64,18 @@ class _FTabState extends State<FTab> with SingleTickerProviderStateMixin {
             new MyHomePage(
                 title: 'Flutter '
                     'Demo'),
-            new FutureBuilder(
-                future: _responsePhoto,
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<Photo>> snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
-                  return snapshot.hasData
-                      ? new PhotoList(photos: snapshot.data)
-                      : new Container(
-                          alignment: AlignmentDirectional.center,
-                        );
-                }),
+//            new FutureBuilder(
+//                future: _responsePhoto,
+//                builder: (BuildContext context,
+//                    AsyncSnapshot<List<Photo>> snapshot) {
+//                  if (snapshot.hasError) print(snapshot.error);
+//                  return snapshot.hasData
+//                      ? new PhotoList(photos: snapshot.data)
+//                      : new Container(
+//                          alignment: AlignmentDirectional.center,
+//                        );
+//                }),
+            new MapsDemo(),
             new FutureBuilder(
                 future: _orderData,
                 builder: (context, snapshot) {

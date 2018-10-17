@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodiez/ui/ftab.dart';
 import 'package:foodiez/ui/splashscreen.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
