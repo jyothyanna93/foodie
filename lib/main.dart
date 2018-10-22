@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodiez/ui/ftab.dart';
 import 'package:foodiez/ui/splashscreen.dart';
+import 'package:map_view/map_view.dart';
 
+var api_key = "AIzaSyDrHKl8IxB4cGXIoELXQOzzZwiH1xtsRf4";
 void main() {
-  runApp(MyApp());
+  MapView.setApiKey(api_key);
+
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

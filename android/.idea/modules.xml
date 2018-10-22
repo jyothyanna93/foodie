@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/git/plugins-abfb4dee656161f1108a8945a0071a78f911eb66/packages/google_maps_flutter/android/google_maps_flutter.iml" filepath="$USER_HOME$/.pub-cache/git/plugins-abfb4dee656161f1108a8945a0071a78f911eb66/packages/google_maps_flutter/android/google_maps_flutter.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/location-1.4.1/android/location.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/location-1.4.1/android/location.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.3/android/shared_preferences.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.3/android/shared_preferences.iml" />
     </modules>
   </component>
 </project>
